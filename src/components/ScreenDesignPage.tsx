@@ -1,6 +1,6 @@
 import { Suspense, useMemo, useState, useRef, useCallback, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Maximize2, GripVertical, Layout, Smartphone, Tablet, Monitor } from 'lucide-react'
+import { ArrowLeft, Maximize2, GripVertical, Layout, Smartphone, Tablet, Monitor, LayoutDashboard, CalendarDays, Users, BookOpen, Circle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { loadScreenDesignComponent, sectionUsesShell } from '@/lib/section-loader'
@@ -97,33 +97,30 @@ export function ScreenDesignPage() {
             <div className="flex items-center gap-1 border-r border-stone-200 dark:border-stone-700 pr-4">
               <button
                 onClick={() => setWidthPercent(30)}
-                className={`p-1.5 rounded transition-colors ${
-                  widthPercent <= 40
+                className={`p-1.5 rounded transition-colors ${widthPercent <= 40
                     ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
                     : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
-                }`}
+                  }`}
                 title="Mobile (30%)"
               >
                 <Smartphone className="w-4 h-4" strokeWidth={1.5} />
               </button>
               <button
                 onClick={() => setWidthPercent(60)}
-                className={`p-1.5 rounded transition-colors ${
-                  widthPercent > 40 && widthPercent <= 60
+                className={`p-1.5 rounded transition-colors ${widthPercent > 40 && widthPercent <= 60
                     ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
                     : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
-                }`}
+                  }`}
                 title="Tablet (60%)"
               >
                 <Tablet className="w-4 h-4" strokeWidth={1.5} />
               </button>
               <button
                 onClick={() => setWidthPercent(100)}
-                className={`p-1.5 rounded transition-colors ${
-                  widthPercent > 60
+                className={`p-1.5 rounded transition-colors ${widthPercent > 60
                     ? 'bg-stone-200 dark:bg-stone-700 text-stone-900 dark:text-stone-100'
                     : 'text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
-                }`}
+                  }`}
                 title="Desktop (100%)"
               >
                 <Monitor className="w-4 h-4" strokeWidth={1.5} />
@@ -253,23 +250,32 @@ export function ScreenDesignFullscreen() {
           const shellInfo = loadShellInfo()
           const specNavItems = shellInfo?.spec?.navigationItems || []
 
+          // Icon mapping for known section labels
+          const iconMap: Record<string, typeof Circle> = {
+            dashboard: LayoutDashboard,
+            'rotation planning': CalendarDays,
+            profiles: Users,
+            'knowledge base': BookOpen,
+          }
+
           // Parse navigation items from spec (format: "**Label** → Description")
           const navigationItems = specNavItems.length > 0
             ? specNavItems.map((item, index) => {
-                // Extract label from **Label** format
-                const labelMatch = item.match(/\*\*([^*]+)\*\*/)
-                const label = labelMatch ? labelMatch[1] : item.split('→')[0]?.trim() || `Item ${index + 1}`
-                return {
-                  label,
-                  href: `/${label.toLowerCase().replace(/\s+/g, '-')}`,
-                  isActive: index === 0,
-                }
-              })
+              // Extract label from **Label** format
+              const labelMatch = item.match(/\*\*([^*]+)\*\*/)
+              const label = labelMatch ? labelMatch[1] : item.split('→')[0]?.trim() || `Item ${index + 1}`
+              return {
+                label,
+                href: `/${label.toLowerCase().replace(/\s+/g, '-')}`,
+                icon: iconMap[label.toLowerCase()] || Circle,
+                isActive: index === 0,
+              }
+            })
             : [
-                { label: 'Dashboard', href: '/', isActive: true },
-                { label: 'Items', href: '/items' },
-                { label: 'Settings', href: '/settings' },
-              ]
+              { label: 'Dashboard', href: '/', icon: LayoutDashboard, isActive: true },
+              { label: 'Items', href: '/items', icon: Circle },
+              { label: 'Settings', href: '/settings', icon: Circle },
+            ]
 
           const defaultUser = {
             name: 'Demo User',
@@ -280,8 +286,8 @@ export function ScreenDesignFullscreen() {
             <ShellComponent
               navigationItems={navigationItems}
               user={defaultUser}
-              onNavigate={() => {}}
-              onLogout={() => {}}
+              onNavigate={() => { }}
+              onLogout={() => { }}
             >
               {children}
             </ShellComponent>
