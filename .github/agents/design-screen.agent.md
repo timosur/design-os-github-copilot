@@ -42,25 +42,21 @@ Check for optional enhancements:
 **Design Tokens:**
 
 - Check if `product/design-system/colors.json` exists
-- Check if `product/design-system/typography.json` exists
+- Check if `product/design-system/design-system.json` exists
 
-If design tokens exist, read them and use them for styling. If they don't exist, show a warning:
+If design system exists, read it and use it for styling. If it doesn't exist, show a warning:
 
-"Note: Design tokens haven't been defined yet. I'll use default styling, but for consistent branding, consider using the `design-tokens` agent first."
+"Note: Design system hasn't been defined yet. I'll use default styling, but for consistent branding, consider using the `@design-system` agent first."
 
-**Brand Guide:**
-
-- Check if `product/brand-guide/brand-guide.json` exists
-
-If brand guide exists, read it and use its preferences to inform the screen design:
+If the design system contains brand identity fields (personality, voice, uiStyle), use them to inform the screen design:
 
 - **Brand Voice** — Apply tone to labels, button text, empty states, and microcopy
-- **UI Style** — Apply border radius, shadow, border, and spacing preferences
+- **UI Style** — Apply border radius, shadow, and density preferences
 - **Brand Personality** — Inform overall visual direction and component styling
 
-When designing, reference the brand guide context:
+When designing with brand identity, reference the context:
 
-"I'll apply your brand guide preferences:
+"I'll apply your design system preferences:
 
 - Voice: [tone] — [how it affects labels/copy]
 - UI Style: [preferences] — [how it affects components]
@@ -72,7 +68,7 @@ When designing, reference the brand guide context:
 
 If shell exists, the screen design will render inside the shell in Design OS. If not, show a warning:
 
-"Note: An application shell hasn't been designed yet. The screen design will render standalone. Consider using the `design-shell` agent first to see section screen designs in the full app context."
+"Note: An application shell hasn't been designed yet. The screen design will render standalone. Consider using the `@design-shell` agent first to see section screen designs in the full app context."
 
 ## Step 3: Analyze Requirements
 
@@ -166,16 +162,14 @@ export function InvoiceList({ invoices, onView, onEdit, onDelete, onCreate }: In
 
 - Fall back to `stone` for neutrals and `lime` for accents (Design OS defaults)
 
-### Applying Brand Guide Preferences
+### Applying Design System Brand Identity
 
-**If `product/brand-guide/brand-guide.json` exists:**
+**If `product/design-system/design-system.json` exists with brand identity fields:**
 
 **UI Style preferences:**
 
 - `borderRadius`: Use the specified radius for cards, buttons, inputs (e.g., `rounded-lg`)
 - `shadows`: Apply shadow intensity to elevated elements (e.g., `shadow-sm`, `shadow-md`)
-- `borders`: Use border style for containers (e.g., `border`, `border-none`)
-- `spacing`: Apply spacing density to layouts (e.g., more/less padding)
 - `density`: Adjust information density (compact vs. spacious)
 
 **Voice preferences:**

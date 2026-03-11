@@ -30,13 +30,13 @@ Stop here if overview or roadmap are missing.
 
 If design tokens are missing, show a warning but continue:
 
-"Note: Design tokens haven't been defined yet. I'll proceed with default styling, but you may want to use the `design-tokens` agent first for consistent colors and typography."
+"Note: Design system hasn't been defined yet. I'll proceed with default styling, but you may want to use the `@design-system` agent first for consistent colors and typography."
 
-## Step 1b: Check for Brand Guide
+## Step 1b: Check for Brand Identity in Design System
 
-Check if `product/brand-guide/brand-guide.json` exists.
+Check if `product/design-system/design-system.json` exists and contains personality, voice, or uiStyle fields.
 
-If the brand guide exists, read it and use its personality, voice, and UI style preferences to inform design decisions:
+If these optional brand identity fields exist, use them to inform design decisions:
 
 **Brand Personality** — Use adjectives and mood to suggest appropriate layout patterns:
 
@@ -55,7 +55,6 @@ If the brand guide exists, read it and use its personality, voice, and UI style 
 
 - Border radius preference for buttons and cards
 - Shadow intensity for elevated elements
-- Border style for containers
 - Spacing/density for layout
 
 When presenting shell options, reference the brand guide:

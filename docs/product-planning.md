@@ -39,9 +39,19 @@ The agent reviews your product overview and roadmap for context and asks clarify
 
 **Creates:** `product/data-shape/data-shape.md`
 
-## 4. Design Tokens (`@design-tokens`)
+## 4. Design System (`@design-system`)
 
-Choose your visual identity:
+Define your visual identity and brand personality:
+
+### Brand Resources (Optional)
+
+Place existing brand assets in `product/design-system/resources/`:
+
+- Logos (SVG, PNG)
+- Style guides (PDF, images)
+- Screenshot examples
+
+The agent will analyze these to extract colors, fonts, and brand characteristics.
 
 ### Colors
 
@@ -58,6 +68,14 @@ Select from Google Fonts:
 - **Heading** — For titles and section headers (e.g., `DM Sans`, `Inter`, `Space Grotesk`)
 - **Body** — For paragraphs and UI text (e.g., `Inter`, `Source Sans 3`, `Nunito Sans`)
 - **Mono** — For code and technical content (e.g., `JetBrains Mono`, `Fira Code`)
+
+### Brand Identity (Optional)
+
+- **Personality** — Brand adjectives (e.g., "professional", "playful", "minimalist")
+- **Voice** — Tone for UI copy (e.g., "friendly", "formal", "technical")
+- **UI Style** — Component preferences (border radius, shadows, density)
+
+**Creates:** `product/design-system/design-system.json`, `product/design-system/design-system.md`
 
 The agent will suggest options based on your product type and help you find a combination that fits.
 
@@ -80,6 +98,7 @@ You'll also define:
 The shell is implemented as React components that will wrap your section screen designs.
 
 **Creates:**
+
 - `product/shell/spec.md` — Shell specification
 - `src/shell/components/AppShell.tsx` — Main shell wrapper
 - `src/shell/components/MainNav.tsx` — Navigation component

@@ -22,6 +22,7 @@ First, check if `product/data-shape/data-shape.md` exists.
 ## If Data Shape Already Exists (Updating)
 
 Read:
+
 - `product/data-shape/data-shape.md`
 - `product/product-overview.md` (if it exists, for context)
 - `product/product-roadmap.md` (if it exists, for context)
@@ -34,6 +35,7 @@ Present the current state and ask what to change:
 - **[Entity2]** — [Description]
 
 **Relationships:**
+
 - [Relationship 1]
 - [Relationship 2]
 
@@ -50,6 +52,7 @@ After updating, inform the user and ask if they'd like further adjustments.
 ### Check Prerequisites
 
 Read:
+
 1. `product/product-overview.md` to understand what the product does
 2. `product/product-roadmap.md` to understand the planned sections
 
@@ -64,6 +67,7 @@ Stop here if prerequisites are missing.
 Read the product overview and roadmap to understand the product, then ask the user questions about their data. **Do NOT generate the data shape without asking questions first.**
 
 Example questions to ask (adapt based on the product):
+
 - "What are the main 'things' users will create, view, or manage in this product? (e.g., Projects, Invoices, Clients)"
 - "How do these things relate to each other?"
 - "Are there any entities that are shared across multiple sections?"
@@ -81,9 +85,11 @@ Once the user has confirmed the entities and relationships, create `product/data
 ## Entities
 
 ### [EntityName]
+
 [Plain-language description of what this entity represents and its purpose in the system.]
 
 ### [AnotherEntity]
+
 [Plain-language description.]
 
 [Add more entities as needed]
@@ -93,7 +99,7 @@ Once the user has confirmed the entities and relationships, create `product/data
 - [Entity1] has many [Entity2]
 - [Entity2] belongs to [Entity1]
 - [Entity3] belongs to both [Entity1] and [Entity2]
-[Add more relationships as needed]
+  [Add more relationships as needed]
 ```
 
 ### Confirm
@@ -101,14 +107,16 @@ Once the user has confirmed the entities and relationships, create `product/data
 "I've created your data shape at `product/data-shape/data-shape.md`.
 
 **Entities defined:**
+
 - [List entities]
 
 **Relationships:**
+
 - [List key relationships]
 
 This provides a shared vocabulary for your screen designs. When you use the `sample-data` agent, it will reference these entities to ensure consistent naming across sections.
 
-Review and let me know if you'd like to adjust anything. When you're ready, use the `design-tokens` agent to choose your color palette and typography."
+Review and let me know if you'd like to adjust anything. When you're ready, use the `@design-system` agent to define your visual identity and brand personality."
 
 ---
 

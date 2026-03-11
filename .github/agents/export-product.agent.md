@@ -49,12 +49,11 @@ Read all relevant files:
 1. `product/product-overview.md` — Product name, description, features
 2. `product/product-roadmap.md` — List of sections in order
 3. `product/data-shape/data-shape.md` (if exists)
-4. `product/brand-guide/brand-guide.md` (if exists) — Brand guidelines
-5. `product/design-system/colors.json` (if exists)
-6. `product/design-system/typography.json` (if exists)
-7. `product/shell/spec.md` (if exists)
-8. For each section: `spec.md`, `data.json`, `types.ts`
-9. List screen design components in `src/sections/` and `src/shell/`
+4. `product/design-system/design-system.md` (if exists) — Design system documentation
+5. `product/design-system/design-system.json` (if exists)
+6. `product/shell/spec.md` (if exists)
+7. For each section: `spec.md`, `data.json`, `types.ts`
+8. List screen design components in `src/sections/` and `src/shell/`
 
 ## Step 3: Create Export Directory Structure
 
@@ -64,7 +63,7 @@ Create the `product-plan/` directory with this structure:
 product-plan/
 ├── README.md
 ├── product-overview.md
-├── brand-guide.md (if exists)
+├── design-system.md (if exists)
 ├── prompts/
 │   ├── one-shot-prompt.md
 │   └── section-prompt.md
@@ -98,19 +97,18 @@ product-plan/
 
 Create `product-plan/product-overview.md` with: product name, summary, planned sections list, product entities, design system info, and implementation sequence (milestones starting with Shell, then each section).
 
-## Step 4b: Copy Brand Guide (if exists)
+## Step 4b: Copy Design System Documentation (if exists)
 
-If `product/brand-guide/brand-guide.md` exists, copy it to `product-plan/brand-guide.md`.
+If `product/design-system/design-system.md` exists, copy it to `product-plan/design-system.md`.
 
-The brand guide provides implementers with:
+The design system documentation provides implementers with:
 
-- Color and typography rationale
-- Brand voice and tone guidelines
-- UI style preferences
-- Logo usage guidelines
-- Brand personality context
+- Color palette and typography choices
+- Brand voice and tone guidelines (if defined)
+- UI style preferences (border radius, shadows, density)
+- Brand personality context (if defined)
 
-This helps maintain brand consistency during implementation.
+This helps maintain design consistency during implementation.
 
 ## Step 5: Generate Milestone Instructions
 
@@ -318,7 +316,7 @@ Explain how to use it:
 
 - Always transform import paths when copying components
 - Include `product-overview.md` context with every implementation session
-- Include `brand-guide.md` (if present) for brand consistency during implementation
+- Include `design-system.md` for brand consistency during implementation
 - Use the pre-written prompts — they prompt for important clarifying questions
 - Screenshots provide visual reference for fidelity checking
 - Sample data files are for testing before real APIs are built

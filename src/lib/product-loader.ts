@@ -10,7 +10,6 @@ import type {
   ProductData,
 } from "@/types/product";
 import { loadDataShape, hasDataShape } from "./data-shape-loader";
-import { loadBrandGuide, hasBrandGuide } from "./brand-guide-loader";
 import { loadDesignSystem, hasDesignSystem } from "./design-system-loader";
 import { loadShellInfo, hasShell } from "./shell-loader";
 
@@ -188,7 +187,6 @@ export function loadProductData(): ProductData {
     overview: overviewContent ? parseProductOverview(overviewContent) : null,
     roadmap: roadmapContent ? parseProductRoadmap(roadmapContent) : null,
     dataShape: loadDataShape(),
-    brandGuide: loadBrandGuide(),
     designSystem: loadDesignSystem(),
     shell: loadShellInfo(),
   };

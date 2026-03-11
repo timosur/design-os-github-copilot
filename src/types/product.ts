@@ -48,7 +48,7 @@ export interface DataShape {
 }
 
 // =============================================================================
-// Design System
+// Design System (unified: colors, typography, brand identity)
 // =============================================================================
 
 export interface ColorTokens {
@@ -63,44 +63,6 @@ export interface TypographyTokens {
   mono: string;
 }
 
-export interface DesignSystem {
-  colors: ColorTokens | null;
-  typography: TypographyTokens | null;
-}
-
-// =============================================================================
-// Brand Guide
-// =============================================================================
-
-export interface BrandColorChoice {
-  name: string;
-  rationale: string;
-}
-
-export interface BrandColors {
-  primary: BrandColorChoice;
-  secondary: BrandColorChoice;
-  neutral: BrandColorChoice;
-  semantic?: {
-    success?: string;
-    warning?: string;
-    error?: string;
-    info?: string;
-  };
-}
-
-export interface BrandFontChoice {
-  font: string;
-  weights?: number[];
-  rationale?: string;
-}
-
-export interface BrandTypography {
-  heading: BrandFontChoice;
-  body: BrandFontChoice;
-  mono?: BrandFontChoice;
-}
-
 export interface BrandVoice {
   tone: string;
   characteristics: string[];
@@ -109,33 +71,29 @@ export interface BrandVoice {
 
 export interface BrandLogo {
   primaryFile?: string;
-  variants?: string[];
-  protectedArea?: string;
-  minSize?: string;
   usageNotes?: string;
 }
 
-export interface BrandUIStyle {
+export interface UIStyle {
   borderRadius?: string;
   shadows?: string;
-  borders?: string;
-  spacing?: string;
   density?: string;
 }
 
 export interface BrandPersonality {
   adjectives: string[];
   mood: string;
-  visualDirection?: string;
 }
 
-export interface BrandGuide {
-  colors?: BrandColors;
-  typography?: BrandTypography;
-  voice?: BrandVoice;
-  logo?: BrandLogo;
-  uiStyle?: BrandUIStyle;
+export interface DesignSystem {
+  // Required
+  colors: ColorTokens | null;
+  typography: TypographyTokens | null;
+  // Optional brand identity
   personality?: BrandPersonality;
+  voice?: BrandVoice;
+  uiStyle?: UIStyle;
+  logo?: BrandLogo;
   resources?: string[];
   generatedAt?: string;
 }
@@ -164,7 +122,6 @@ export interface ProductData {
   overview: ProductOverview | null;
   roadmap: ProductRoadmap | null;
   dataShape: DataShape | null;
-  brandGuide: BrandGuide | null;
   designSystem: DesignSystem | null;
   shell: ShellInfo | null;
 }

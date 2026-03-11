@@ -22,7 +22,7 @@ Before designing any screens, establish the foundation:
 1. **Product Vision** (`@product-vision`) — Define your product name, description, problems, and features
 2. **Product Roadmap** (`@product-roadmap`) — Define the main sections/areas of your product
 3. **Data Shape** (`@data-shape`) — Sketch out core entities and relationships
-4. **Design Tokens** (`@design-tokens`) — Choose colors and typography
+4. **Design System** (`@design-system`) — Define visual identity and brand personality
 5. **Application Shell** (`@design-shell`) — Design navigation and layout
 
 See [Product Planning](product-planning.md) for details on each agent.
@@ -63,7 +63,7 @@ See [Export](export.md) for details on what's included and how to use it.
 | `@product-vision`    | Define product name, description, problems, and features |
 | `@product-roadmap`   | Define main sections/areas of the product                |
 | `@data-shape`        | Sketch out core entities and relationships               |
-| `@design-tokens`     | Choose colors and typography                             |
+| `@design-system`     | Define visual identity and brand personality             |
 | `@design-shell`      | Design navigation and layout                             |
 | `@shape-section`     | Define a section's scope and requirements                |
 | `@sample-data`       | Generate sample data and TypeScript types                |

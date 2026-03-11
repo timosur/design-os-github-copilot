@@ -13,7 +13,7 @@ Design OS is a **product planning and design tool** that helps users define thei
 - Only produce the outputs described in your agent's instructions. Do not generate files or content that belong to a different agent or a later phase.
 - If the user's request is ambiguous, ask a clarifying question — do not assume they want you to do more than what your agent covers.
 - Never jump ahead in the planning flow. For example, the `@product-vision` agent must NOT create design tokens, shell specs, or section designs. It creates the product overview — that's it.
-- If the user asks for something outside your scope, tell them which agent to use instead (e.g., "That's handled by the `@design-tokens` agent").
+- If the user asks for something outside your scope, tell them which agent to use instead (e.g., "That's handled by the `@design-system` agent").
 - Completing your task well is more valuable than doing many things poorly.
 
 ## Critical: Always Ask Before Generating
@@ -69,35 +69,30 @@ Define the main sections (features/areas) of the product.
 Sketch out the core entities and their relationships.
 **Output:** `product/data-shape/data-shape.md`
 
-### 4. Brand Guide (`@brand-guide`) — _Optional but Recommended_
+### 4. Design System (`@design-system`)
 
-Import and analyze brand resources (logos, style guides, color palettes, fonts) to generate a comprehensive brand guide. This informs all downstream design decisions.
-**Input:** Place brand assets in `product/brand-guide/resources/`
-**Output:** `product/brand-guide/brand-guide.json`, `product/brand-guide/brand-guide.md`
+Define your visual identity: colors (from Tailwind), typography (from Google Fonts), and optionally brand personality, voice, and UI style preferences. You can import brand resources (logos, style guides) for analysis.
+**Input (optional):** Place brand assets in `product/design-system/resources/`
+**Output:** `product/design-system/design-system.json`, `product/design-system/design-system.md`
 
-### 5. Design System (`@design-tokens`)
+### 5. Application Shell (`@design-shell`)
 
-Choose your color palette (from Tailwind) and typography (from Google Fonts). If a brand guide exists, suggestions are pre-populated from it.
-**Output:** `product/design-system/colors.json`, `product/design-system/typography.json`
-
-### 6. Application Shell (`@design-shell`)
-
-Design the persistent navigation and layout that wraps all sections. Uses brand personality and UI style preferences if available.
+Design the persistent navigation and layout that wraps all sections. Uses design system personality and UI style preferences if available.
 **Output:** `product/shell/spec.md`, `src/shell/components/`
 
-### 7. For Each Section:
+### 6. For Each Section
 
 - `@shape-section` — Define the specification and generate sample data + types
 - `@sample-data` — Update sample data and types (if already created)
-- `@design-screen` — Create screen designs (applies brand voice and UI style)
+- `@design-screen` — Create screen designs (applies design system voice and UI style)
 - `@screenshot-design` — Capture screenshots
 
-### 8. Clickdummy (`@clickdummy`)
+### 7. Clickdummy (`@clickdummy`)
 
 Assemble a fully navigable clickdummy from all designed sections. Wraps screen designs in the application shell with working inter-section navigation at `/clickdummy/preview`. Use this to demo to stakeholders and gather feedback before exporting.
 **Output:** `src/clickdummy/ClickdummyApp.tsx`, route at `/clickdummy/preview`
 
-### 9. Export (`@export-product`)
+### 8. Export (`@export-product`)
 
 Generate the complete export package with all components, types, and handoff documentation.
 **Output:** `product-plan/`
@@ -114,14 +109,10 @@ product/                           # Product definition (portable)
 ├── data-shape/                    # Product data shape
 │   └── data-shape.md              # Entity names, descriptions, and relationships
 │
-├── brand-guide/                   # Brand identity (optional)
+├── design-system/                 # Design system (colors, typography, brand identity)
 │   ├── resources/                 # User-imported brand assets (logos, style guides, etc.)
-│   ├── brand-guide.json           # Structured brand data for agents
-│   └── brand-guide.md             # Human-readable brand documentation
-│
-├── design-system/                 # Design tokens
-│   ├── colors.json                # { primary, secondary, neutral }
-│   └── typography.json            # { heading, body, mono }
+│   ├── design-system.json         # Structured design system data for agents
+│   └── design-system.md           # Human-readable design system documentation
 │
 ├── shell/                         # Application shell
 │   └── spec.md                    # Shell specification
@@ -152,7 +143,7 @@ src/
 product-plan/                      # Export package (generated)
 ├── README.md                      # Quick start guide
 ├── product-overview.md            # Product summary
-├── brand-guide.md                 # Brand guidelines (if created)
+├── design-system.md               # Design system documentation (colors, fonts, brand identity)
 ├── prompts/                       # Ready-to-use prompts for coding agents
 │   ├── one-shot-prompt.md         # Prompt for full implementation
 │   └── section-prompt.md          # Prompt template for incremental
@@ -217,6 +208,8 @@ Design OS is organized around four main areas:
 3. **Design System** — The "look and feel"
    - Color palette (Tailwind colors)
    - Typography (Google Fonts)
+   - Brand personality and voice (optional)
+   - UI style preferences (optional)
 
 4. **Application Shell** — The persistent chrome
    - Global navigation structure

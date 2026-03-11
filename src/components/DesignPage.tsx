@@ -1,14 +1,14 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { AppLayout } from '@/components/AppLayout'
 import { EmptyState } from '@/components/EmptyState'
 import { StepIndicator, type StepStatus } from '@/components/StepIndicator'
 import { NextPhaseButton } from '@/components/NextPhaseButton'
-import { BrandGuideCard } from '@/components/BrandGuideCard'
 import { loadProductData } from '@/lib/product-loader'
-import { hasBrandGuide } from '@/lib/brand-guide-loader'
-import { ChevronRight, Layout } from 'lucide-react'
+import { hasDesignResources, getDesignResourceFiles } from '@/lib/design-system-loader'
+import { ChevronRight, Layout, FileImage, FileText, Type, FolderOpen } from 'lucide-react'
 
 // Map Tailwind color names to actual color values for preview
 const colorMap: Record<string, { light: string; base: string; dark: string }> = {
@@ -36,40 +36,54 @@ const colorMap: Record<string, { light: string; base: string; dark: string }> = 
   stone: { light: '#d6d3d1', base: '#78716c', dark: '#57534e' },
 }
 
+// Categorize resource files by type
+function categorizeResources(files: string[]): {
+  images: string[]
+  documents: string[]
+  fonts: string[]
+  other: string[]
+} {
+  const categories = {
+    images: [] as string[],
+    documents: [] as string[],
+    fonts: [] as string[],
+    other: [] as string[],
+  }
+
+  for (const file of files) {
+    const ext = file.split('.').pop()?.toLowerCase() || ''
+    if (['png', 'jpg', 'jpeg', 'svg', 'gif', 'webp'].includes(ext)) {
+      categories.images.push(file)
+    } else if (['pdf', 'md', 'txt', 'doc', 'docx'].includes(ext)) {
+      categories.documents.push(file)
+    } else if (['ttf', 'otf', 'woff', 'woff2'].includes(ext)) {
+      categories.fonts.push(file)
+    } else {
+      categories.other.push(file)
+    }
+  }
+
+  return categories
+}
+
 /**
  * Determine the status of each step on the Design page
- * Steps: 1. Brand Guide (optional), 2. Design Tokens, 3. Shell Design
+ * Steps: 1. Design System, 2. Shell Design
  */
 function getDesignPageStepStatuses(
-  hasBrandGuideValue: boolean,
   hasDesignSystem: boolean,
   hasShell: boolean
 ): StepStatus[] {
   const statuses: StepStatus[] = []
 
-  // Step 1: Brand Guide (optional - always shows as completed if exists, current if not)
-  if (hasBrandGuideValue) {
-    statuses.push('completed')
-  } else {
-    // Brand guide is optional, so if not present but design system exists, mark as skipped/upcoming
-    // If nothing else is done, make it current
-    if (!hasDesignSystem) {
-      statuses.push('current')
-    } else {
-      statuses.push('upcoming') // Skipped
-    }
-  }
-
-  // Step 2: Design Tokens
+  // Step 1: Design System
   if (hasDesignSystem) {
     statuses.push('completed')
-  } else if (hasBrandGuideValue || statuses[0] === 'upcoming') {
-    statuses.push('current')
   } else {
-    statuses.push('upcoming')
+    statuses.push('current')
   }
 
-  // Step 3: Shell
+  // Step 2: Shell
   if (hasShell) {
     statuses.push('completed')
   } else if (hasDesignSystem) {
@@ -83,16 +97,19 @@ function getDesignPageStepStatuses(
 
 export function DesignPage() {
   const productData = useMemo(() => loadProductData(), [])
-  const brandGuide = productData.brandGuide
   const designSystem = productData.designSystem
   const shell = productData.shell
 
-  const hasBrandGuideValue = hasBrandGuide()
-  const hasDesignSystem = !!(designSystem?.colors || designSystem?.typography)
+  const hasDesignSystemValue = !!(designSystem?.colors || designSystem?.typography)
   const hasShell = !!shell?.spec
-  const allStepsComplete = hasDesignSystem && hasShell
+  const allStepsComplete = hasDesignSystemValue && hasShell
 
-  const stepStatuses = getDesignPageStepStatuses(hasBrandGuideValue, hasDesignSystem, hasShell)
+  const stepStatuses = getDesignPageStepStatuses(hasDesignSystemValue, hasShell)
+
+  // Get resource files for display
+  const resourceFiles = getDesignResourceFiles()
+  const hasResources = hasDesignResources()
+  const categories = categorizeResources(resourceFiles)
 
   return (
     <AppLayout>
@@ -107,20 +124,15 @@ export function DesignPage() {
           </p>
         </div>
 
-        {/* Step 1: Brand Guide (Optional) */}
-        <StepIndicator step={1} status={stepStatuses[0]} optional>
-          <BrandGuideCard brandGuide={brandGuide} />
-        </StepIndicator>
-
-        {/* Step 2: Design Tokens */}
-        <StepIndicator step={2} status={stepStatuses[1]}>
+        {/* Step 1: Design System */}
+        <StepIndicator step={1} status={stepStatuses[0]}>
           {!designSystem?.colors && !designSystem?.typography ? (
-            <EmptyState type="design-system" />
+            <DesignSystemEmptyState hasResources={hasResources} />
           ) : (
             <Card className="border-stone-200 dark:border-stone-700 shadow-sm">
               <CardHeader className="pb-4">
                 <CardTitle className="text-lg font-semibold text-stone-900 dark:text-stone-100">
-                  Design Tokens
+                  Design System
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -176,10 +188,111 @@ export function DesignPage() {
                   </div>
                 )}
 
+                {/* Brand Personality */}
+                {designSystem?.personality && (
+                  <div>
+                    <h4 className="text-sm font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-3">
+                      Brand Personality
+                    </h4>
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {designSystem.personality.adjectives?.map((adj, i) => (
+                        <Badge key={i} variant="secondary" className="text-xs">
+                          {adj}
+                        </Badge>
+                      ))}
+                    </div>
+                    {designSystem.personality.mood && (
+                      <p className="text-sm text-stone-600 dark:text-stone-400">
+                        {designSystem.personality.mood}
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {/* Brand Voice */}
+                {designSystem?.voice && (
+                  <div>
+                    <h4 className="text-sm font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-3">
+                      Brand Voice
+                    </h4>
+                    <p className="text-sm text-stone-700 dark:text-stone-300 font-medium mb-2">
+                      {designSystem.voice.tone}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {designSystem.voice.characteristics?.map((char, i) => (
+                        <span
+                          key={i}
+                          className="text-xs text-stone-500 dark:text-stone-400 bg-stone-100 dark:bg-stone-800 px-2 py-1 rounded"
+                        >
+                          {char}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* UI Style Preferences */}
+                {designSystem?.uiStyle && (
+                  <div>
+                    <h4 className="text-sm font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-3">
+                      UI Style
+                    </h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                      {designSystem.uiStyle.borderRadius && (
+                        <div className="bg-stone-50 dark:bg-stone-800/50 rounded px-3 py-2">
+                          <p className="text-xs text-stone-500 dark:text-stone-400 mb-0.5">Radius</p>
+                          <p className="text-sm text-stone-700 dark:text-stone-300">{designSystem.uiStyle.borderRadius}</p>
+                        </div>
+                      )}
+                      {designSystem.uiStyle.shadows && (
+                        <div className="bg-stone-50 dark:bg-stone-800/50 rounded px-3 py-2">
+                          <p className="text-xs text-stone-500 dark:text-stone-400 mb-0.5">Shadows</p>
+                          <p className="text-sm text-stone-700 dark:text-stone-300">{designSystem.uiStyle.shadows}</p>
+                        </div>
+                      )}
+                      {designSystem.uiStyle.density && (
+                        <div className="bg-stone-50 dark:bg-stone-800/50 rounded px-3 py-2">
+                          <p className="text-xs text-stone-500 dark:text-stone-400 mb-0.5">Density</p>
+                          <p className="text-sm text-stone-700 dark:text-stone-300">{designSystem.uiStyle.density}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Brand Resources */}
+                {hasResources && (
+                  <div>
+                    <h4 className="text-sm font-medium text-stone-500 dark:text-stone-400 uppercase tracking-wide mb-3">
+                      Source Resources
+                    </h4>
+                    <div className="flex flex-wrap gap-4 text-xs text-stone-500 dark:text-stone-400">
+                      {categories.images.length > 0 && (
+                        <div className="flex items-center gap-1.5">
+                          <FileImage className="w-3.5 h-3.5" />
+                          <span>{categories.images.length} image{categories.images.length !== 1 ? 's' : ''}</span>
+                        </div>
+                      )}
+                      {categories.documents.length > 0 && (
+                        <div className="flex items-center gap-1.5">
+                          <FileText className="w-3.5 h-3.5" />
+                          <span>{categories.documents.length} document{categories.documents.length !== 1 ? 's' : ''}</span>
+                        </div>
+                      )}
+                      {categories.fonts.length > 0 && (
+                        <div className="flex items-center gap-1.5">
+                          <Type className="w-3.5 h-3.5" />
+                          <span>{categories.fonts.length} font{categories.fonts.length !== 1 ? 's' : ''}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 {/* Edit hint */}
                 <div className="bg-stone-100 dark:bg-stone-800 rounded-md px-4 py-2.5">
                   <p className="text-xs text-stone-500 dark:text-stone-400">
-                    Use the <code className="font-mono text-stone-700 dark:text-stone-300">@design-tokens</code> agent to update
+                    Use the <code className="font-mono text-stone-700 dark:text-stone-300">@design-system</code> agent to update
                   </p>
                 </div>
               </CardContent>
@@ -187,8 +300,8 @@ export function DesignPage() {
           )}
         </StepIndicator>
 
-        {/* Step 3: Application Shell */}
-        <StepIndicator step={3} status={stepStatuses[2]} isLast={!allStepsComplete}>
+        {/* Step 2: Application Shell */}
+        <StepIndicator step={2} status={stepStatuses[1]} isLast={!allStepsComplete}>
           {!shell?.spec ? (
             <EmptyState type="shell" />
           ) : (
@@ -266,7 +379,7 @@ export function DesignPage() {
 
         {/* Next Phase Button - shown when all steps complete */}
         {allStepsComplete && (
-          <StepIndicator step={4} status="current" isLast>
+          <StepIndicator step={3} status="current" isLast>
             <NextPhaseButton nextPhase="sections" />
           </StepIndicator>
         )}
@@ -292,7 +405,7 @@ function ColorSwatch({ label, colorName }: ColorSwatchProps) {
           title={`${colorName}-300`}
         />
         <div
-          className="flex-[2] h-14"
+          className="flex-2 h-14"
           style={{ backgroundColor: colors.base }}
           title={`${colorName}-500`}
         />
@@ -305,5 +418,84 @@ function ColorSwatch({ label, colorName }: ColorSwatchProps) {
       <p className="text-sm font-medium text-stone-900 dark:text-stone-100">{label}</p>
       <p className="text-xs text-stone-500 dark:text-stone-400">{colorName}</p>
     </div>
+  )
+}
+
+/**
+ * Custom empty state for design system that includes the resource hint
+ */
+function DesignSystemEmptyState({ hasResources }: { hasResources: boolean }) {
+  return (
+    <Card className="border-stone-200 dark:border-stone-700 shadow-sm border-dashed">
+      <CardContent className="py-8">
+        <div className="flex flex-col items-center text-center max-w-sm mx-auto">
+          <div className="w-10 h-10 rounded-full bg-stone-100 dark:bg-stone-800 flex items-center justify-center mb-3">
+            <Layout className="w-5 h-5 text-stone-400 dark:text-stone-500" strokeWidth={1.5} />
+          </div>
+          <h3 className="text-base font-medium text-stone-600 dark:text-stone-400 mb-1">
+            No design system defined yet
+          </h3>
+          <p className="text-sm text-stone-500 dark:text-stone-400 mb-4">
+            Define colors, typography, and brand identity for your product
+          </p>
+          <div className="bg-stone-100 dark:bg-stone-800 rounded-md px-4 py-2.5 w-full space-y-2">
+            <div>
+              <p className="text-xs text-stone-500 dark:text-stone-400 mb-0.5">
+                Select Copilot agent:
+              </p>
+              <code className="text-sm font-mono text-stone-700 dark:text-stone-300">
+                @design-system
+              </code>
+            </div>
+            <div className="border-t border-stone-200 dark:border-stone-700 pt-2">
+              <p className="text-xs text-stone-500 dark:text-stone-400 mb-0.5">
+                Then say:
+              </p>
+              <p className="text-sm text-stone-600 dark:text-stone-300 italic">
+                "Help me define my design system"
+              </p>
+            </div>
+          </div>
+
+          {/* Brand resources hint */}
+          <div className="mt-4 w-full">
+            <div className="bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-700 rounded-md px-4 py-3">
+              <div className="flex items-start gap-3">
+                <FolderOpen className="w-4 h-4 text-stone-400 dark:text-stone-500 mt-0.5 shrink-0" />
+                <div className="space-y-2 text-left">
+                  <div>
+                    <p className="text-xs font-medium text-stone-600 dark:text-stone-300 mb-1">
+                      {hasResources ? 'Brand resources found' : 'Optional: Add brand resources first'}
+                    </p>
+                    <code className="text-xs font-mono text-stone-500 dark:text-stone-400 bg-stone-100 dark:bg-stone-800 px-1.5 py-0.5 rounded">
+                      product/design-system/resources/
+                    </code>
+                  </div>
+                  {!hasResources && (
+                    <div className="text-xs text-stone-500 dark:text-stone-400 space-y-1">
+                      <p className="font-medium text-stone-600 dark:text-stone-300">What to add:</p>
+                      <ul className="space-y-0.5 ml-1">
+                        <li className="flex items-center gap-1.5">
+                          <FileImage className="w-3 h-3" />
+                          <span>Logos (SVG, PNG)</span>
+                        </li>
+                        <li className="flex items-center gap-1.5">
+                          <FileText className="w-3 h-3" />
+                          <span>Style guides (PDF, images)</span>
+                        </li>
+                        <li className="flex items-center gap-1.5">
+                          <Type className="w-3 h-3" />
+                          <span>Font files or names</span>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   )
 }

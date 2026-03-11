@@ -30,7 +30,7 @@ You interact with Design OS through **Copilot agents**. Each agent walks you thr
 - `@product-vision` — Define your product name, description, problems, solutions, and key features
 - `@product-roadmap` — Define the main areas/sections of your product
 - `@data-shape` — Sketch out the core data entities and relationships
-- `@design-tokens` — Choose your color palette and typography
+- `@design-system` — Define your visual identity and brand personality
 - `@design-shell` — Design navigation and layout
 - `@shape-section` — Define a section's scope and requirements
 - `@sample-data` — Generate sample data and TypeScript types for a section
