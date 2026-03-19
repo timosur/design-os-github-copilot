@@ -12,8 +12,8 @@ Design OS is a **product planning and design tool** that helps users define thei
 
 - Only produce the outputs described in your agent's instructions. Do not generate files or content that belong to a different agent or a later phase.
 - If the user's request is ambiguous, ask a clarifying question — do not assume they want you to do more than what your agent covers.
-- Never jump ahead in the planning flow. For example, the `@product-vision` agent must NOT create design tokens, shell specs, or section designs. It creates the product overview — that's it.
-- If the user asks for something outside your scope, tell them which agent to use instead (e.g., "That's handled by the `@design-system` agent").
+- Never jump ahead in the planning flow. For example, the `@00-product-vision` agent must NOT create design tokens, shell specs, or section designs. It creates the product overview — that's it.
+- If the user asks for something outside your scope, tell them which agent to use instead (e.g., "That's handled by the `@03-design-system` agent").
 - Completing your task well is more valuable than doing many things poorly.
 
 ## Critical: Always Ask Before Generating
@@ -54,45 +54,45 @@ The product you're planning and designing. When creating screen designs and expo
 
 Design OS follows a structured planning sequence. Each step has a dedicated Copilot agent. Use one agent at a time — complete each step before moving to the next.
 
-### 1. Product Overview (`@product-vision`)
+### 1. Product Overview (`@00-product-vision`)
 
 Define your product name, description, problems/solutions, and key features.
 **Output:** `product/product-overview.md`
 
-### 2. Product Roadmap (`@product-roadmap`)
+### 2. Product Roadmap (`@01-product-roadmap`)
 
 Define the main sections (features/areas) of the product.
 **Output:** `product/product-roadmap.md`
 
-### 3. Data Shape (`@data-shape`)
+### 3. Data Shape (`@02-data-shape`)
 
 Sketch out the core entities and their relationships.
 **Output:** `product/data-shape/data-shape.md`
 
-### 4. Design System (`@design-system`)
+### 4. Design System (`@03-design-system`)
 
 Define your visual identity: colors (from Tailwind), typography (from Google Fonts), and optionally brand personality, voice, and UI style preferences. You can import brand resources (logos, style guides) for analysis.
 **Input (optional):** Place brand assets in `product/design-system/resources/`
 **Output:** `product/design-system/design-system.json`, `product/design-system/design-system.md`
 
-### 5. Application Shell (`@design-shell`)
+### 5. Application Shell (`@04-design-shell`)
 
 Design the persistent navigation and layout that wraps all sections. Uses design system personality and UI style preferences if available.
 **Output:** `product/shell/spec.md`, `src/shell/components/`
 
 ### 6. For Each Section
 
-- `@shape-section` — Define the specification and generate sample data + types
-- `@sample-data` — Update sample data and types (if already created)
-- `@design-screen` — Create screen designs (applies design system voice and UI style)
-- `@screenshot-design` — Capture screenshots
+- `@05-shape-section` — Define the specification and generate sample data + types
+- `@06-sample-data` — Update sample data and types (if already created)
+- `@07-design-screen` — Create screen designs (applies design system voice and UI style)
+- `@08-screenshot-design` — Capture screenshots
 
-### 7. Clickdummy (`@clickdummy`)
+### 7. Clickdummy (`@09-clickdummy`)
 
 Assemble a fully navigable clickdummy from all designed sections. Wraps screen designs in the application shell with working inter-section navigation at `/clickdummy/preview`. Use this to demo to stakeholders and gather feedback before exporting.
 **Output:** `src/clickdummy/ClickdummyApp.tsx`, route at `/clickdummy/preview`
 
-### 8. Export (`@export-product`)
+### 8. Export (`@10-export-product`)
 
 Generate the complete export package with all components, types, and handoff documentation.
 **Output:** `product-plan/`
@@ -232,7 +232,7 @@ Design OS separates concerns between its own UI and the product being designed:
 
 ## Export & Handoff
 
-The `@export-product` agent generates a UI design handoff package:
+The `@10-export-product` agent generates a UI design handoff package:
 
 - **Ready-to-use prompts**: Pre-written prompts to copy/paste into coding agents
   - `one-shot-prompt.md`: For full implementation in one session

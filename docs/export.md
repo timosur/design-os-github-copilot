@@ -12,9 +12,9 @@ You're ready to export when:
 
 You can export at any point—it doesn't have to be "complete." Exporting generates a snapshot of your current designs. You can always export again later as you add more sections.
 
-## Running the Export (`@export-product`)
+## Running the Export (`@10-export-product`)
 
-Select the `@export-product` agent in Copilot Chat and start a conversation. The agent will:
+Select the `@10-export-product` agent in Copilot Chat and start a conversation. The agent will:
 
 1. **Check prerequisites** — Verify required files exist
 2. **Gather all design assets** — Components, types, data, tokens

@@ -1,6 +1,10 @@
 ---
-name: design-shell
-description: Design the application shell — the persistent navigation and layout that wraps all sections. Creates the shell specification and React components.
+name: 04-design-shell
+description: "Step 4: Design the application shell — the persistent navigation and layout that wraps all sections. Creates the shell specification and React components."
+handoffs:
+  - label: Shape First Section
+    agent: 05-shape-section
+    prompt: "Application shell is designed. Define the specification for the first section."
 ---
 
 Refer to @agents.md for the full Design OS context, file structure, and conventions.
@@ -23,14 +27,14 @@ If overview or roadmap are missing:
 
 "Before designing the shell, you need to define your product and sections. Please use:
 
-1. `product-vision` agent — Define your product
-2. `product-roadmap` agent — Define your sections"
+1. `@00-product-vision` agent — Define your product
+2. `@01-product-roadmap` agent — Define your sections"
 
 Stop here if overview or roadmap are missing.
 
 If design tokens are missing, show a warning but continue:
 
-"Note: Design system hasn't been defined yet. I'll proceed with default styling, but you may want to use the `@design-system` agent first for consistent colors and typography."
+"Note: Design system hasn't been defined yet. I'll proceed with default styling, but you may want to use the `@03-design-system` agent first for consistent colors and typography."
 
 ## Step 1b: Check for Brand Identity in Design System
 
@@ -283,9 +287,9 @@ Let the user know:
 
 **Important:** Restart your dev server to see the changes.
 
-When you design section screens with the `design-screen` agent, they will render inside this shell, showing the full app experience.
+When you design section screens with the `@07-design-screen` agent, they will render inside this shell, showing the full app experience.
 
-Next: Use the `shape-section` agent to start designing your first section."
+Next: Use the `@05-shape-section` agent to start designing your first section."
 
 ## Important Notes
 

@@ -33,7 +33,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ## Open GitHub Copilot Chat
 
-In VS Code, open Copilot Chat and select the `@product-vision` agent from the agent dropdown to begin defining your product.
+In VS Code, open Copilot Chat and select the `@00-product-vision` agent from the agent dropdown to begin defining your product.
 
 ---
 

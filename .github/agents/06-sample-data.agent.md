@@ -1,6 +1,10 @@
 ---
-name: sample-data
-description: Create or update realistic sample data and TypeScript types for a product section. Generates data.json and types.ts used to populate screen designs.
+name: 06-sample-data
+description: "Step 6: Create or update realistic sample data and TypeScript types for a product section. Generates data.json and types.ts used to populate screen designs."
+handoffs:
+  - label: Design Screen
+    agent: 07-design-screen
+    prompt: "Sample data and types are ready. Create the screen design for this section."
 ---
 
 Refer to @agents.md for the full Design OS context, file structure, and conventions.
@@ -23,7 +27,7 @@ If there's only one section, auto-select it. If there are multiple sections, ask
 
 Then check if `product/sections/[section-id]/spec.md` exists. If it doesn't:
 
-"I don't see a specification for **[Section Title]** yet. Please use the `shape-section` agent first to define the section's requirements, then come back to generate sample data."
+"I don't see a specification for **[Section Title]** yet. Please use the `@05-shape-section` agent first to define the section's requirements, then come back to generate sample data."
 
 Stop here if the spec doesn't exist.
 
@@ -57,7 +61,7 @@ Check if `product/data-shape/data-shape.md` exists.
 **If it doesn't exist:**
 Show a warning but continue:
 
-"Note: A global data shape hasn't been defined yet. I'll create entity structures based on the section spec, but for consistency across sections, consider using the `data-shape` agent first."
+"Note: A global data shape hasn't been defined yet. I'll create entity structures based on the section spec, but for consistency across sections, consider using the `@02-data-shape` agent first."
 
 ## Step 4: Ask Clarifying Questions
 
@@ -223,7 +227,7 @@ The types include:
 - `[Entity]` - The main data type
 - `[SectionName]Props` - Props interface for the component (includes callbacks for [list actions])
 
-Review the files and let me know if you'd like any adjustments. When you're ready, use the `design-screen` agent to create the screen design for this section."
+Review the files and let me know if you'd like any adjustments. When you're ready, use the `@07-design-screen` agent to create the screen design for this section."
 
 ## Important Notes
 

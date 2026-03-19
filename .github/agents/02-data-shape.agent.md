@@ -1,6 +1,10 @@
 ---
-name: data-shape
-description: Create or update the general data shape for your product — core entities and their relationships. Establishes shared vocabulary for consistent naming across sections.
+name: 02-data-shape
+description: "Step 2: Create or update the general data shape for your product — core entities and their relationships. Establishes shared vocabulary for consistent naming across sections."
+handoffs:
+  - label: Define Design System
+    agent: 03-design-system
+    prompt: "Data shape is defined. Define the visual identity — colors, typography, and brand personality."
 ---
 
 Refer to @agents.md for the full Design OS context, file structure, and conventions.
@@ -58,7 +62,7 @@ Read:
 
 If either file is missing, let the user know:
 
-"Before defining your data shape, you'll need to establish your product vision. Please use the `product-vision` agent first."
+"Before defining your data shape, you'll need to establish your product vision. Please use the `@00-product-vision` agent first."
 
 Stop here if prerequisites are missing.
 
@@ -116,7 +120,7 @@ Once the user has confirmed the entities and relationships, create `product/data
 
 This provides a shared vocabulary for your screen designs. When you use the `sample-data` agent, it will reference these entities to ensure consistent naming across sections.
 
-Review and let me know if you'd like to adjust anything. When you're ready, use the `@design-system` agent to define your visual identity and brand personality."
+Review and let me know if you'd like to adjust anything. When you're ready, use the `@03-design-system` agent to define your visual identity and brand personality."
 
 ---
 

@@ -1,6 +1,10 @@
 ---
-name: clickdummy
-description: Assemble a fully navigable clickdummy from existing screen designs. Creates a /clickdummy route that wraps all sections in the application shell with working navigation for stakeholder demos.
+name: 09-clickdummy
+description: "Step 9: Assemble a fully navigable clickdummy from existing screen designs. Creates a /clickdummy route that wraps all sections in the application shell with working navigation for stakeholder demos."
+handoffs:
+  - label: Export Product
+    agent: 10-export-product
+    prompt: "Clickdummy is assembled. Generate the complete export package for handoff."
 ---
 
 Refer to @agents.md for the full Design OS context, file structure, and conventions.
@@ -25,11 +29,11 @@ If any core file is missing:
 
 "Before assembling a clickdummy, you need:
 
-- A product overview → use `@product-vision`
-- A roadmap with sections → use `@product-roadmap`
-- An application shell → use `@design-shell`
+- A product overview → use `@00-product-vision`
+- A roadmap with sections → use `@01-product-roadmap`
+- An application shell → use `@04-design-shell`
 
-Please create these first, then run `@clickdummy` again."
+Please create these first, then run `@09-clickdummy` again."
 
 **Stop here** if any core file is missing.
 
@@ -66,17 +70,17 @@ For sections **missing specs** (no `spec.md`):
 
 "**[Section Title]** needs a specification first. Use these agents in order:
 
-1. `@shape-section` — Define the section specification
-2. `@sample-data` — Generate sample data and types
-3. `@design-screen` — Create the screen design"
+1. `@05-shape-section` — Define the section specification
+2. `@06-sample-data` — Generate sample data and types
+3. `@07-design-screen` — Create the screen design"
 
 For sections **with spec + data but no screen design** (has `spec.md` and `data.json` but no `.tsx` in `src/sections/[id]/`):
 
-"**[Section Title]** has a spec and data but no screen design yet. Use `@design-screen` to create it."
+"**[Section Title]** has a spec and data but no screen design yet. Use `@07-design-screen` to create it."
 
 Then finish with:
 
-"Once all sections have screen designs, run `@clickdummy` again to assemble the clickdummy."
+"Once all sections have screen designs, run `@09-clickdummy` again to assemble the clickdummy."
 
 **Stop here. Do not proceed to assembly.**
 
@@ -210,7 +214,7 @@ function FallbackContent({ sectionId }: { sectionId: string }) {
           No screen design found for &ldquo;{sectionId}&rdquo;
         </p>
         <p className="text-sm text-slate-500 dark:text-slate-500 mt-1">
-          Use the <code>@design-screen</code> agent to create one.
+          Use the <code>@07-design-screen</code> agent to create one.
         </p>
       </div>
     </div>

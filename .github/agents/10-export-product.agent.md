@@ -1,6 +1,6 @@
 ---
-name: export-product
-description: Generate the complete export package with all components, types, prompts, and handoff documentation. Creates the product-plan/ directory ready for integration into a separate codebase.
+name: 10-export-product
+description: "Step 10: Generate the complete export package with all components, types, prompts, and handoff documentation. Creates the product-plan/ directory ready for integration into a separate codebase."
 ---
 
 Refer to @agents.md for the full Design OS context, file structure, and conventions.
@@ -32,8 +32,8 @@ If required files are missing:
 
 "To export your product, you need at minimum:
 
-- A product overview (`product-vision` agent)
-- A roadmap with sections (`product-roadmap` agent)
+- A product overview (`@00-product-vision` agent)
+- A roadmap with sections (`@01-product-roadmap` agent)
 - At least one section with screen designs
 
 Please complete these first."

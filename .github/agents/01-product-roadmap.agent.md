@@ -1,6 +1,10 @@
 ---
-name: product-roadmap
-description: Create or update the product roadmap for Design OS. Generates the list of sections (features) with titles and descriptions.
+name: 01-product-roadmap
+description: "Step 1: Create or update the product roadmap for Design OS. Generates the list of sections (features) with titles and descriptions."
+handoffs:
+  - label: Define Data Shape
+    agent: 02-data-shape
+    prompt: "Product roadmap is defined. Sketch out the core entities and their relationships."
 ---
 
 Refer to @agents.md for the full Design OS context, file structure, and conventions.
@@ -47,7 +51,7 @@ After updating, inform the user and ask if they'd like further adjustments.
 
 Read `product/product-overview.md`. If it doesn't exist:
 
-"Before creating a product roadmap, you'll need to define your product vision. Please use the `product-vision` agent first."
+"Before creating a product roadmap, you'll need to define your product vision. Please use the `@00-product-vision` agent first."
 
 Stop here if the product overview is missing.
 
@@ -90,7 +94,7 @@ Once the user has confirmed the sections they want, create `product/product-road
 2. **[Section 2]** — [Description]
 3. **[Section 3]** — [Description]
 
-Review the sections and let me know if you'd like to adjust anything. When you're ready, use the `data-shape` agent to sketch out the general shape of your product's data."
+Review the sections and let me know if you'd like to adjust anything. When you're ready, use the `@02-data-shape` agent to sketch out the general shape of your product's data."
 
 ---
 

@@ -1,6 +1,10 @@
 ---
-name: design-system
-description: Define your product's visual identity — colors, typography, brand personality, and UI style. Optionally import brand resources (logos, style guides) for analysis.
+name: 03-design-system
+description: "Step 3: Define your product's visual identity — colors, typography, brand personality, and UI style. Optionally import brand resources (logos, style guides) for analysis."
+handoffs:
+  - label: Design Shell
+    agent: 04-design-shell
+    prompt: "Design system is defined. Design the application shell — navigation and layout."
 ---
 
 Refer to @agents.md for the full Design OS context, file structure, and conventions.
@@ -26,7 +30,7 @@ Read `product/product-overview.md` to understand what the product is.
 
 If it doesn't exist:
 
-"Before defining your design system, you'll need to establish your product vision. Please use the `@product-vision` agent first."
+"Before defining your design system, you'll need to establish your product vision. Please use the `@00-product-vision` agent first."
 
 Stop here if the prerequisite is missing.
 
@@ -381,7 +385,7 @@ Once approved, create:
 
 ---
 
-_This design system informs all screen designs and the application shell. The `@design-shell` and `@design-screen` agents will reference these tokens and preferences._
+_This design system informs all screen designs and the application shell. The `@04-design-shell` and `@07-design-screen` agents will reference these tokens and preferences._
 ```
 
 ## Step 7b: Update Google Fonts in index.html
@@ -417,7 +421,7 @@ Let the user know:
 
 These will be used when creating screen designs for your sections.
 
-Next step: Use the `@design-shell` agent to design your application's navigation and layout."
+Next step: Use the `@04-design-shell` agent to design your application's navigation and layout."
 
 ---
 

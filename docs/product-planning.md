@@ -2,7 +2,7 @@
 
 The first phase of Design OS establishes the foundation for your product. Complete these steps before designing any screens.
 
-## 1. Product Vision (`@product-vision`)
+## 1. Product Vision (`@00-product-vision`)
 
 Define your product's core identity. The agent will ask you about:
 
@@ -15,7 +15,7 @@ Share any notes, ideas, or rough thoughts you have about what you're building. T
 
 **Creates:** `product/product-overview.md`
 
-## 2. Product Roadmap (`@product-roadmap`)
+## 2. Product Roadmap (`@01-product-roadmap`)
 
 Define the main sections (features/areas) of your product. The agent will ask you about:
 
@@ -27,7 +27,7 @@ The agent reviews your product overview for context and asks clarifying question
 
 **Creates:** `product/product-roadmap.md`
 
-## 3. Data Shape (`@data-shape`)
+## 3. Data Shape (`@02-data-shape`)
 
 Sketch out the core entities ("nouns") and their relationships. The agent will ask you about:
 
@@ -39,7 +39,7 @@ The agent reviews your product overview and roadmap for context and asks clarify
 
 **Creates:** `product/data-shape/data-shape.md`
 
-## 4. Design System (`@design-system`)
+## 4. Design System (`@03-design-system`)
 
 Define your visual identity and brand personality:
 
@@ -81,7 +81,7 @@ The agent will suggest options based on your product type and help you find a co
 
 **Creates:** `product/design-system/colors.json`, `product/design-system/typography.json`
 
-## 5. Application Shell (`@design-shell`)
+## 5. Application Shell (`@04-design-shell`)
 
 Design the persistent navigation and layout that wraps all your sections. Choose from common patterns:
 

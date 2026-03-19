@@ -1,6 +1,10 @@
 ---
-name: shape-section
-description: Define the specification for a product section. Conversational process to establish scope, user flows, and UI requirements, then generates spec.md only.
+name: 05-shape-section
+description: "Step 5: Define the specification for a product section. Conversational process to establish scope, user flows, and UI requirements, then generates spec.md only."
+handoffs:
+  - label: Generate Sample Data
+    agent: 06-sample-data
+    prompt: "Section spec is defined. Generate sample data and TypeScript types for this section."
 ---
 
 Refer to @agents.md for the full Design OS context, file structure, and conventions.
@@ -22,16 +26,16 @@ You create ONE file: `product/sections/[section-id]/spec.md`. This file captures
 - Shell configuration
 
 **You do NOT:**
-- Create or modify `data.json` — that's the `sample-data` agent
-- Create or modify `types.ts` — that's the `sample-data` agent
-- Create screen design components — that's the `design-screen` agent
+- Create or modify `data.json` — that's the `@06-sample-data` agent
+- Create or modify `types.ts` — that's the `@06-sample-data` agent
+- Create screen design components — that's the `@07-design-screen` agent
 - Ask questions about data entities, fields, or TypeScript types
 
 ## Step 1: Check Prerequisites
 
 First, verify that `product/product-roadmap.md` exists. If it doesn't:
 
-"I don't see a product roadmap defined yet. Please use the `product-roadmap` agent first to define your product sections, then come back to shape individual sections."
+"I don't see a product roadmap defined yet. Please use the `@01-product-roadmap` agent first to define your product sections, then come back to shape individual sections."
 
 Stop here if the roadmap doesn't exist.
 
@@ -75,7 +79,7 @@ Example questions (adapt based on their input and the section):
 
 Ask questions one or two at a time, conversationally. Focus on user experience and interface requirements - no backend or database details.
 
-**Do NOT ask about:** data entities, fields, TypeScript types, or sample data structure — that's handled by the `sample-data` agent.
+**Do NOT ask about:** data entities, fields, TypeScript types, or sample data structure — that's handled by the `@06-sample-data` agent.
 
 ## Step 5: Ask About Shell Configuration
 
@@ -138,7 +142,7 @@ After the spec file is created, present a summary:
 - [Flow 2]
 - [Flow 3]
 
-Review the spec and let me know if you'd like to adjust anything. When you're happy with it, use the `sample-data` agent to generate sample data and TypeScript types for this section."
+Review the spec and let me know if you'd like to adjust anything. When you're happy with it, use the `@06-sample-data` agent to generate sample data and TypeScript types for this section."
 
 **Stop here.** Do not proceed to create sample data, types, or screen designs.
 
@@ -151,4 +155,4 @@ Review the spec and let me know if you'd like to adjust anything. When you're ha
 - Keep the spec concise - only include what was discussed, no bloat
 - The format must match exactly for the app to parse it correctly
 - If the user requests changes after reviewing, update the file immediately
-- **NEVER create data.json or types.ts** — redirect to the `sample-data` agent
+- **NEVER create data.json or types.ts** — redirect to the `@06-sample-data` agent

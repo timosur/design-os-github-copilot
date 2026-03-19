@@ -1,6 +1,16 @@
 ---
-name: design-screen
-description: Create a screen design for a product section. Builds props-based React components with Tailwind CSS that can be exported and integrated into any React codebase.
+name: 07-design-screen
+description: "Step 7: Create a screen design for a product section. Builds props-based React components with Tailwind CSS that can be exported and integrated into any React codebase."
+handoffs:
+  - label: Capture Screenshot
+    agent: 08-screenshot-design
+    prompt: "Screen design is complete. Capture a screenshot for documentation."
+  - label: Shape Next Section
+    agent: 05-shape-section
+    prompt: "Screen design is done. Shape the next section in the roadmap."
+  - label: Assemble Clickdummy
+    agent: 09-clickdummy
+    prompt: "All sections are designed. Assemble the navigable clickdummy."
 ---
 
 Refer to @agents.md for the full Design OS context, file structure, and conventions.
@@ -27,11 +37,11 @@ Then verify all required files exist:
 
 If spec.md doesn't exist:
 
-"I don't see a specification for **[Section Title]** yet. Please use the `shape-section` agent first to define the section's requirements."
+"I don't see a specification for **[Section Title]** yet. Please use the `@05-shape-section` agent first to define the section's requirements."
 
 If data.json or types.ts don't exist:
 
-"I don't see sample data for **[Section Title]** yet. Please use the `sample-data` agent first to create sample data and types for the screen designs."
+"I don't see sample data for **[Section Title]** yet. Please use the `@06-sample-data` agent first to create sample data and types for the screen designs."
 
 Stop here if any file is missing.
 
@@ -46,7 +56,7 @@ Check for optional enhancements:
 
 If design system exists, read it and use it for styling. If it doesn't exist, show a warning:
 
-"Note: Design system hasn't been defined yet. I'll use default styling, but for consistent branding, consider using the `@design-system` agent first."
+"Note: Design system hasn't been defined yet. I'll use default styling, but for consistent branding, consider using the `@03-design-system` agent first."
 
 If the design system contains brand identity fields (personality, voice, uiStyle), use them to inform the screen design:
 
@@ -68,7 +78,7 @@ When designing with brand identity, reference the context:
 
 If shell exists, the screen design will render inside the shell in Design OS. If not, show a warning:
 
-"Note: An application shell hasn't been designed yet. The screen design will render standalone. Consider using the `@design-shell` agent first to see section screen designs in the full app context."
+"Note: An application shell hasn't been designed yet. The screen design will render standalone. Consider using the `@04-design-shell` agent first to see section screen designs in the full app context."
 
 ## Step 3: Analyze Requirements
 
@@ -267,9 +277,9 @@ Let the user know:
 
 **Next steps:**
 
-- Use the `screenshot-design` agent to capture a screenshot of this screen design for documentation
-- If the spec calls for additional views, use `design-screen` again to create them
-- When all sections are complete, use the `export-product` agent to generate the complete export package"
+- Use the `@08-screenshot-design` agent to capture a screenshot of this screen design for documentation
+- If the spec calls for additional views, use `@07-design-screen` again to create them
+- When all sections are complete, use the `@10-export-product` agent to generate the complete export package"
 
 ## Important Notes
 

@@ -27,17 +27,17 @@ Design OS is its own separate codebase—a design environment you use _before_ b
 
 You interact with Design OS through **Copilot agents**. Each agent walks you through a specific part of the process:
 
-- `@product-vision` — Define your product name, description, problems, solutions, and key features
-- `@product-roadmap` — Define the main areas/sections of your product
-- `@data-shape` — Sketch out the core data entities and relationships
-- `@design-system` — Define your visual identity and brand personality
-- `@design-shell` — Design navigation and layout
-- `@shape-section` — Define a section's scope and requirements
-- `@sample-data` — Generate sample data and TypeScript types for a section
-- `@design-screen` — Create production-ready React components
-- `@screenshot-design` — Snap a screenshot of a finished design screen for quick reference
-- `@clickdummy` — Assemble a navigable clickdummy for stakeholder demos and feedback
-- `@export-product` — Generate the complete handoff package
+- `@00-product-vision` — Define your product name, description, problems, solutions, and key features
+- `@01-product-roadmap` — Define the main areas/sections of your product
+- `@02-data-shape` — Sketch out the core data entities and relationships
+- `@03-design-system` — Define your visual identity and brand personality
+- `@04-design-shell` — Design navigation and layout
+- `@05-shape-section` — Define a section's scope and requirements
+- `@06-sample-data` — Generate sample data and TypeScript types for a section
+- `@07-design-screen` — Create production-ready React components
+- `@08-screenshot-design` — Snap a screenshot of a finished design screen for quick reference
+- `@09-clickdummy` — Assemble a navigable clickdummy for stakeholder demos and feedback
+- `@10-export-product` — Generate the complete handoff package
 
 See [Usage](usage.md) for the full workflow.
 

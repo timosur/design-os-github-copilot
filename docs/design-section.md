@@ -2,7 +2,7 @@
 
 After completing [Product Planning](product-planning.md), you're ready to design individual sections. Work through each section in your roadmap, completing these steps for each one.
 
-## 1. Shape the Section (`@shape-section`)
+## 1. Shape the Section (`@05-shape-section`)
 
 Define what the section does and how it should work. If you have multiple sections, you'll be asked which one to work on.
 
@@ -19,7 +19,7 @@ You'll also be asked whether this section should display inside the application 
 
 **Creates:** `product/sections/[section-id]/spec.md`
 
-## 2. Generate Sample Data (`@sample-data`)
+## 2. Generate Sample Data (`@06-sample-data`)
 
 Generate sample data and TypeScript types for the section. The agent reviews the section spec and asks clarifying questions about:
 
@@ -31,9 +31,9 @@ Generate sample data and TypeScript types for the section. The agent reviews the
 - `product/sections/[section-id]/data.json` — Sample data with `_meta` descriptions
 - `product/sections/[section-id]/types.ts` — TypeScript interfaces
 
-Run `@sample-data` again any time you need to update the data structure or sample records.
+Run `@06-sample-data` again any time you need to update the data structure or sample records.
 
-## 3. Design the Screen (`@design-screen`)
+## 3. Design the Screen (`@07-design-screen`)
 
 Build the actual React components for the section. This is where the spec and sample data become a working UI.
 
@@ -71,7 +71,7 @@ All screen designs include:
 
 ### Multiple Views
 
-If the spec implies multiple views (list view, detail view, form, etc.), you'll be asked which to build first. Run `@design-screen` again for additional views.
+If the spec implies multiple views (list view, detail view, form, etc.), you'll be asked which to build first. Run `@07-design-screen` again for additional views.
 
 **Creates:**
 - `src/sections/[section-id]/components/[ViewName].tsx` — Main component
@@ -81,7 +81,7 @@ If the spec implies multiple views (list view, detail view, form, etc.), you'll 
 
 **Important:** Restart your dev server after creating screen designs to see the changes.
 
-## 4. Capture Screenshots (Optional) (`@screenshot-design`)
+## 4. Capture Screenshots (Optional) (`@08-screenshot-design`)
 
 Take screenshots of your screen designs for documentation. Screenshots are saved alongside the spec and data files.
 
