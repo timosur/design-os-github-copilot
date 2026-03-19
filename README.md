@@ -21,7 +21,8 @@ Design OS powers a guided design and architecture process. You + AI, working tog
 1. **Product Planning** — Define your vision, break down your roadmap, and model your data
 2. **Design System** — Choose colors, typography, and design your application shell
 3. **Section Design** — For each feature area: specify requirements, generate sample data, and design the screens
-4. **Export** — Generate a complete handoff package for implementation
+4. **Clickdummy** — Assemble a fully navigable prototype from all designed sections to demo to stakeholders and gather feedback
+5. **Export** — Generate a complete handoff package for implementation
 
 Each step is a conversation. The AI asks questions, you provide direction, and together you shape a product that matches your vision—before any implementation begins.
 
