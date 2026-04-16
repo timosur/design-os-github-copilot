@@ -15,6 +15,8 @@ Refer to @agents.md for the full Design OS context, file structure, and conventi
 
 You are helping the user define the complete visual identity for their product. This includes:
 
+** important notes: follow the given UI Design system structure and file requirements closely to DESIGN.md Do not deviate from the specified format or content requirements. just use the provided structure and guidelines from DESIGN.md**
+
 - **Colors** — Primary, secondary, and neutral palettes (required)
 - **Typography** — Heading, body, and mono fonts (required)
 - **Brand Personality** — Adjectives and mood (optional)

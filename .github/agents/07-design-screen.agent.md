@@ -1,6 +1,6 @@
 ---
 name: 07-design-screen
-description: "Step 7: Create a screen design for a product section. Builds props-based React components with Tailwind CSS that can be exported and integrated into any React codebase."
+description: "Step 7: Create a screen design for a product section. Builds props-based React components with Tailwind CSS that can be exported and integrated into any React codebase. use DESIGN.md for design guidelines and UI best practices."
 handoffs:
   - label: Capture Screenshot
     agent: 08-screenshot-design
@@ -129,9 +129,15 @@ Example:
 ```tsx
 import type { InvoiceListProps } from "@/../product/sections/[section-id]/types";
 
-export function InvoiceList({ invoices, onView, onEdit, onDelete, onCreate }: InvoiceListProps) {
+export function InvoiceList({
+  invoices,
+  onView,
+  onEdit,
+  onDelete,
+  onCreate,
+}: InvoiceListProps) {
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className='max-w-4xl mx-auto'>
       {/* Component content here */}
       <button onClick={onCreate}>Create Invoice</button>
       {invoices.map((invoice) => (
