@@ -7,6 +7,7 @@ Design OS is a **product planning and design tool** that helps users define thei
 ---
 
 ## Critical: Stay Focused on Your Task
+## Critical: Always use style and Design template from ./Design.md every ui should follow these guidelines
 
 **Each agent has ONE job. Do that job and nothing else.**
 
