@@ -52,47 +52,61 @@ The product you're planning and designing. When creating screen designs and expo
 
 ## Getting Started — The Planning Flow
 
-Design OS follows a structured planning sequence. Each step has a dedicated Copilot agent. Use one agent at a time — complete each step before moving to the next.
+Design OS follows a structured planning sequence. Each step has a dedicated agent. Use one agent at a time — complete each step before moving to the next.
 
-### 1. Product Overview (`@00-product-vision`)
+| Step | Copilot Agent | Claude Code Command |
+|------|--------------|---------------------|
+| 1. Product Overview | `@00-product-vision` | `/product-vision` |
+| 2. Product Roadmap | `@01-product-roadmap` | `/product-roadmap` |
+| 3. Data Shape | `@02-data-shape` | `/data-shape` |
+| 4. Design System | `@03-design-system` | `/design-tokens` |
+| 5. Application Shell | `@04-design-shell` | `/design-shell` |
+| 6a. Shape Section | `@05-shape-section` | `/shape-section` |
+| 6b. Sample Data | `@06-sample-data` | `/sample-data` |
+| 6c. Design Screen | `@07-design-screen` | `/design-screen` |
+| 6d. Screenshot | `@08-screenshot-design` | `/screenshot-design` |
+| 7. Clickdummy | `@09-clickdummy` | `/clickdummy` |
+| 8. Export | `@10-export-product` | `/export-product` |
+
+### 1. Product Overview
 
 Define your product name, description, problems/solutions, and key features.
 **Output:** `product/product-overview.md`
 
-### 2. Product Roadmap (`@01-product-roadmap`)
+### 2. Product Roadmap
 
 Define the main sections (features/areas) of the product.
 **Output:** `product/product-roadmap.md`
 
-### 3. Data Shape (`@02-data-shape`)
+### 3. Data Shape
 
 Sketch out the core entities and their relationships.
 **Output:** `product/data-shape/data-shape.md`
 
-### 4. Design System (`@03-design-system`)
+### 4. Design System
 
 Define your visual identity: colors (from Tailwind), typography (from Google Fonts), and optionally brand personality, voice, and UI style preferences. You can import brand resources (logos, style guides) for analysis.
 **Input (optional):** Place brand assets in `product/design-system/resources/`
 **Output:** `product/design-system/design-system.json`, `product/design-system/design-system.md`
 
-### 5. Application Shell (`@04-design-shell`)
+### 5. Application Shell
 
 Design the persistent navigation and layout that wraps all sections. Uses design system personality and UI style preferences if available.
 **Output:** `product/shell/spec.md`, `src/shell/components/`
 
 ### 6. For Each Section
 
-- `@05-shape-section` — Define the specification and generate sample data + types
-- `@06-sample-data` — Update sample data and types (if already created)
-- `@07-design-screen` — Create screen designs (applies design system voice and UI style)
-- `@08-screenshot-design` — Capture screenshots
+- **Shape Section** — Define the specification (only spec.md)
+- **Sample Data** — Generate sample data and types
+- **Design Screen** — Create screen designs (applies design system voice and UI style)
+- **Screenshot** — Capture screenshots
 
-### 7. Clickdummy (`@09-clickdummy`)
+### 7. Clickdummy
 
 Assemble a fully navigable clickdummy from all designed sections. Wraps screen designs in the application shell with working inter-section navigation at `/clickdummy/preview`. Use this to demo to stakeholders and gather feedback before exporting.
 **Output:** `src/clickdummy/ClickdummyApp.tsx`, route at `/clickdummy/preview`
 
-### 8. Export (`@10-export-product`)
+### 8. Export
 
 Generate the complete export package with all components, types, and handoff documentation.
 **Output:** `product-plan/`
