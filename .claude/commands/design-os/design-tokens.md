@@ -1,21 +1,6 @@
----
-name: 03-design-system
-description: "Step 3: Define your product's visual identity — colors, typography, brand personality, and UI style. Optionally import brand resources (logos, style guides) for analysis."
-handoffs:
-  - label: Design Shell
-    agent: 04-design-shell
-    prompt: "Design system is defined. Design the application shell — navigation and layout."
----
-
-Refer to @agents.md for the full Design OS context, file structure, and conventions.
-
-**Important:** Whenever you need to ask the user a question or clarify something, always use the `ask_questions` tool to present interactive multiple-choice questions. Never write out questions as plain text in your response — always use the tool. This keeps the conversation efficient and easy to respond to.
-
 # Design System
 
 You are helping the user define the complete visual identity for their product. This includes:
-
-** important notes: follow the given UI Design system structure and file requirements closely to DESIGN.md Do not deviate from the specified format or content requirements. just use the provided structure and guidelines from DESIGN.md**
 
 - **Colors** — Primary, secondary, and neutral palettes (required)
 - **Typography** — Heading, body, and mono fonts (required)
@@ -32,7 +17,7 @@ Read `product/product-overview.md` to understand what the product is.
 
 If it doesn't exist:
 
-"Before defining your design system, you'll need to establish your product vision. Please use the `@00-product-vision` agent first."
+"Before defining your design system, you'll need to establish your product vision. Please run `/product-vision` first."
 
 Stop here if the prerequisite is missing.
 
@@ -73,14 +58,13 @@ If the folder doesn't exist or is empty:
 **Do you have existing brand assets?**
 
 If yes, create a folder at `product/design-system/resources/` and add:
-
 - Logo files (SVG, PNG)
 - Style guides (PDF, images of brand guidelines)
 - Color palette images or swatches
 - Font files or font names
 - Mood board images
 
-Then run this agent again.
+Then run this command again.
 
 If no, we'll build your visual identity from scratch through a few questions.
 
@@ -95,7 +79,6 @@ For each file in `product/design-system/resources/`, analyze its contents:
 ### Image Files (PNG, JPG, SVG)
 
 Use vision to analyze:
-
 - **Logos**: Extract dominant colors, identify font styles if text is present, note the visual style (minimal, detailed, geometric, organic)
 - **Color palettes**: Extract the specific colors shown, note any labels or names
 - **Mood boards**: Identify the overall aesthetic, key colors, textures, and visual themes
@@ -104,7 +87,6 @@ Use vision to analyze:
 ### Text/Document Files (MD, TXT, PDF)
 
 Read and extract:
-
 - Color specifications (hex codes, Pantone, RGB)
 - Font names and weights
 - Voice and tone guidelines
@@ -120,23 +102,18 @@ After analyzing all resources, summarize what you found:
 "I've analyzed your brand resources. Here's what I found:
 
 **Colors:**
-
 - [List extracted colors with their apparent uses]
 
 **Typography:**
-
 - [List identified fonts]
 
 **Visual Style:**
-
 - [Describe the overall aesthetic]
 
 **Brand Voice:** (if found)
-
 - [Describe tone and characteristics]
 
 **Logo Guidelines:** (if found)
-
 - [Summarize usage rules]
 
 Does this look accurate? Is there anything I missed or got wrong?"
@@ -170,7 +147,6 @@ Should complement your primary — often a different hue or a neutral variation
 Options: `slate` (cool gray), `gray` (pure gray), `zinc` (slightly warm), `neutral`, `stone` (warm gray)
 
 Based on [Product Name], I'd suggest:
-
 - **Primary:** [suggestion] — [why it fits]
 - **Secondary:** [suggestion] — [why it complements]
 - **Neutral:** [suggestion] — [why it works]
@@ -191,7 +167,6 @@ Often the same as heading, or: `Inter`, `Source Sans 3`, `Nunito Sans`, `Open Sa
 Options: `IBM Plex Mono`, `JetBrains Mono`, `Fira Code`, `Source Code Pro`
 
 My suggestions for [Product Name]:
-
 - **Heading:** [suggestion] — [why]
 - **Body:** [suggestion] — [why]
 - **Mono:** [suggestion] — [why]
@@ -232,29 +207,24 @@ Compile all choices into a summary:
 "Here's your complete design system for **[Product Name]**:
 
 ## Colors
-
 - **Primary**: `[color]` — [usage notes]
 - **Secondary**: `[color]` — [usage notes]
 - **Neutral**: `[color]` — [usage notes]
 
 ## Typography
-
 - **Heading**: [Font Name]
 - **Body**: [Font Name]
 - **Mono**: [Font Name]
 
 ## Brand Personality
-
 - **Adjectives**: [list]
 - **Mood**: [description]
 
 ## Brand Voice
-
 - **Tone**: [description]
 - **Characteristics**: [list]
 
 ## UI Style
-
 - **Border radius**: [preference]
 - **Shadows**: [preference]
 - **Density**: [preference]
@@ -305,7 +275,6 @@ Once approved, create:
 ```
 
 **Notes:**
-
 - Only include `personality`, `voice`, `uiStyle`, and `logo` sections if the user provided that information
 - `colors` and `typography` are always required
 - `resources` array lists any files in the resources folder
@@ -320,15 +289,12 @@ Once approved, create:
 ## Colors
 
 ### Primary: `[color]`
-
 [Usage: buttons, links, key actions]
 
 ### Secondary: `[color]`
-
 [Usage: tags, highlights, secondary elements]
 
 ### Neutral: `[color]`
-
 [Usage: backgrounds, text, borders]
 
 ---
@@ -336,15 +302,12 @@ Once approved, create:
 ## Typography
 
 ### Headings: [Font Name]
-
 [Usage and recommended weights]
 
 ### Body: [Font Name]
-
 [Usage and recommended weights]
 
 ### Monospace: [Font Name]
-
 [Usage for code and technical content]
 
 ---
@@ -362,7 +325,6 @@ Once approved, create:
 **Tone:** [description]
 
 **Key Characteristics:**
-
 - [Characteristic 1]
 - [Characteristic 2]
 - [Characteristic 3]
@@ -387,7 +349,7 @@ Once approved, create:
 
 ---
 
-_This design system informs all screen designs and the application shell. The `@04-design-shell` and `@07-design-screen` agents will reference these tokens and preferences._
+_This design system informs all screen designs and the application shell. The `/design-shell` and `/design-screen` commands will reference these tokens and preferences._
 ```
 
 ## Step 7b: Update Google Fonts in index.html
@@ -405,32 +367,28 @@ For example, if the user chose `Nunito Sans` for heading/body and `JetBrains Mon
 Let the user know:
 
 "I've saved your design system:
-
-- `product/design-system/design-system.json` — Structured data for agents
+- `product/design-system/design-system.json` — Structured data for commands
 - `product/design-system/design-system.md` — Human-readable documentation
 
 **Your palette:**
-
 - Primary: `[color]` — for buttons, links, key actions
 - Secondary: `[color]` — for tags, highlights, secondary elements
 - Neutral: `[color]` — for backgrounds, text, borders
 
 **Your fonts:**
-
 - [Heading Font] for headings
 - [Body Font] for body text
 - [Mono Font] for code
 
 These will be used when creating screen designs for your sections.
 
-Next step: Use the `@04-design-shell` agent to design your application's navigation and layout."
+Next step: Run `/design-shell` to design your application's navigation and layout."
 
 ---
 
 ## Reference: Tailwind Color Palette
 
 Available colors (each has shades 50-950):
-
 - **Warm:** `red`, `orange`, `amber`, `yellow`, `lime`
 - **Cool:** `green`, `emerald`, `teal`, `cyan`, `sky`, `blue`
 - **Purple:** `indigo`, `violet`, `purple`, `fuchsia`, `pink`, `rose`
